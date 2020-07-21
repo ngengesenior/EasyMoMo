@@ -1,0 +1,49 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnSurface">@android:color/white</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorOnError">@android:color/holo_orange_light</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+    </style>
+
+    <style name="TextViewStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="HeaderStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">?attr/colorPrimaryVariant</item>
+    </style>
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+
+    </style>
+
+    <style name="HintText" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+    <style name="ErrorText" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">?attr/colorOnError</item>
+    </style>
+
+    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+
+    </style>
+
+</resources>

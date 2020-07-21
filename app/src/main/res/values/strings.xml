@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Easy MoMo</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="save">Save</string>
+    <string name="transfer_to">Transfer To</string>
+    <string name="amount_to_be_sent">Amount To be Sent</string>
+    <string name="send">Send</string>
+    <string name="receive_money">Receive Money</string>
+    <string name="add_recipient">Add Recipient</string>
+    <string name="send_money">Send Money</string>
+    <string name="recipients">Recipients</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_phone">Your Phone</string>
+    <string name="making_momo_transactions_easy">Making MoMo transactions easy</string>
+    <string name="enter_valid_amount">Please enter a valid amount</string>
+    <string name="permission_momo_required">Permissions are required to dial Momo code</string>
+    <string name="set_details">Set Your Details</string>
+    <string name="set_valid_details">Please set valid details</string>
+    <string name="invalid_scanned_contact">Invalid contact scanned</string>
+    <string name="need_to_set_details">You need to set your details so that you can receive money when your code is scanned</string>
+</resources>
