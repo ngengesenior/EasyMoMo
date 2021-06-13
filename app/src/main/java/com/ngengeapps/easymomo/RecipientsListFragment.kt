@@ -1,63 +1,135 @@
 package com.ngengeapps.easymomo
 
-import android.Manifest.permission.CALL_PHONE
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.ngengeapps.easymomo.adapters.RecipientsAdapter
-import com.ngengeapps.easymomo.databinding.FragmentRecipientsListBinding
 import com.ngengeapps.easymomo.models.Account
 import com.ngengeapps.easymomo.viewmodels.AccountListViewModel
-import com.ngengeapps.easymomo.viewmodels.AccountListViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class RecipientsListFragment : Fragment() {
 
-    val accountsViewModel: AccountListViewModel by activityViewModels {
-        AccountListViewModelFactory(activity as Context)
-    }
+    private val accountsViewModel: AccountListViewModel by viewModels()
 
-    private lateinit var binding: FragmentRecipientsListBinding
-
+    @ExperimentalAnimationApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRecipientsListBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = accountsViewModel
+
+        return inflater.inflate(R.layout.fragment_recipients_list,
+            container,false).apply {
+                findViewById<ComposeView>(R.id.navigation_receivers).setContent {
+                    MaterialTheme {
+                        RecipientList(accountsViewModel)
+                    }
+                }
+        }
+
+    }
+
+    @ExperimentalAnimationApi
+    @Composable
+    fun RecipientList(accountViewModel: AccountListViewModel = viewModel()) {
+
+        val accounts by accountViewModel.accounts.observeAsState(listOf())
+
+        Scaffold(floatingActionButton = {
+            ExtendedFloatingActionButton(text = { Text(text = stringResource(R.string.add_contact)) },onClick = {
+                val action = RecipientsListFragmentDirections.actionNavigationReceiversToNavigationAddRecipient()
+                findNavController().navigate(action)
+            },modifier = Modifier.padding(bottom = 56.dp),
+            backgroundColor = Color(0xFFE30425),contentColor = androidx.compose.ui.graphics.Color.White )
+        }) {
+
+            AnimatedVisibility(visible = accounts.isNotEmpty()) {
+                LazyColumn{
+                    items(accounts,key = { it}) { account ->
+                        ContactItem(account = account)
+                        Spacer(modifier = Modifier.height(4.dp))
+                    }
 
 
-        binding.recyclerView.setHasFixedSize(true)
+                }
+            }
+            AnimatedVisibility(visible = accounts.isEmpty()) {
+                NoContacts()
+            }
 
-        binding.recyclerView.adapter = RecipientsAdapter(RecipientsAdapter.AccountListener {
-
-            val action =
-                RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer(it.trimAccount())
-            findNavController().navigate(action)
-        })
-        binding.buttonAddContact.setOnClickListener {
-            /*val action = RecipientsListFragmentDirections.actionNavigationReceiversToNavigationAddRecipient()
-            findNavController().navigate(action)*/
-            val action =
-                RecipientsListFragmentDirections.actionNavigationReceiversToNavigationAddRecipient()
-            findNavController().navigate(action)
 
         }
-        return binding.root
+
+
+
+
+    }
+
+
+
+    @Composable
+    fun ContactItem(account: Account) {
+        Card(modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(horizontal = 6.dp),elevation = 4.dp) {
+            Row( modifier = Modifier.clickable {
+                val action =
+                    RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer(account.trimAccount())
+                findNavController().navigate(action)
+
+            } ,verticalAlignment = Alignment.CenterVertically) {
+                Column{
+                    Text(text = account.name)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(text = account.number)
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(painter = painterResource(R.drawable.ic_attach_money_24), contentDescription =null)
+
+            }
+
+        }
+    }
+
+}
+
+@Composable
+fun NoContacts() {
+    Column(verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()) {
+        Text(text = stringResource(R.string.no_contacts))
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = stringResource(R.string.add_fav_prompt),
+            modifier = Modifier.padding(16.dp),fontWeight = FontWeight.Bold)
+
     }
 }
 

@@ -3,31 +3,24 @@ package com.ngengeapps.easymomo
 import android.Manifest.permission.CAMERA
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.ngengeapps.easymomo.databinding.FragmentScanBinding
-import com.ngengeapps.easymomo.models.Account
 import com.ngengeapps.easymomo.models.TrimmedAccount
+import dagger.hilt.android.AndroidEntryPoint
 
-private val MY_CAMERA_REQUEST_CODE = 100
 
-
+@AndroidEntryPoint
 class ScanFragment : Fragment() {
 
-
     private lateinit var binding: FragmentScanBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
 
     private fun setScannerProperties() {
         binding.scannerView.apply {
@@ -87,7 +80,7 @@ class ScanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentScanBinding.inflate(inflater)
         return binding.root

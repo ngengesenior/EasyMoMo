@@ -11,6 +11,9 @@
         android:label="@string/add_recipient"
         tools:layout="@layout/fragment_add_recipient" >
         <action
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/mobile_navigation"
             android:id="@+id/action_navigation_add_recipient_to_navigation_my_qr"
             app:destination="@id/navigation_my_qr" />
     </fragment>

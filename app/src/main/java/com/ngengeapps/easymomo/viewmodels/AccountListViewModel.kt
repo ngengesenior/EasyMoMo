@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ngengeapps.easymomo.database.AccountDao
 import com.ngengeapps.easymomo.models.Account
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AccountListViewModel(val dataSource:AccountDao):ViewModel() {
+@HiltViewModel
+class AccountListViewModel @Inject constructor (private val dataSource:AccountDao):ViewModel() {
     private val _accounts:MutableLiveData<List<Account>> = MutableLiveData()
     val accounts:LiveData<List<Account>>
     get() = _accounts

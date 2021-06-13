@@ -19,4 +19,11 @@
     <string name="set_valid_details">Please set valid details</string>
     <string name="invalid_scanned_contact">Invalid contact scanned</string>
     <string name="need_to_set_details">You need to set your details so that you can receive money when your code is scanned</string>
+    <string name="title_activity_compose">Compose</string>
+    <string name="perm_phone">You need phone permissions to dial MOMO code</string>
+    <string name="go_to_settings">Please enable call permission to dial momo code</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="add_fav_prompt">You can Add your favorite contacts to send money to</string>
+    <string name="no_contacts">No Contacts</string>
+    <string name="fields_required">All fields are required</string>
 </resources>

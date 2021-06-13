@@ -3,7 +3,7 @@
     package="com.ngengeapps.easymomo">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:name=".EasyApp"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -19,13 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SetDetailsActivity">
-
-        </activity>
+        <activity android:name=".SetDetailsActivity"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>
