@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ScanFragment">
+        tools:context=".ui.ScanFragment">
 
         <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:layout_width="match_parent"

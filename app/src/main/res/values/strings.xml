@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy MoMo</string>
+    <string name="app_name" translatable="false">Easy MoMo</string>
     <string name="name">Name</string>
     <string name="phone">Phone Number</string>
     <string name="save">Save</string>
@@ -19,11 +19,17 @@
     <string name="set_valid_details">Please set valid details</string>
     <string name="invalid_scanned_contact">Invalid contact scanned</string>
     <string name="need_to_set_details">You need to set your details so that you can receive money when your code is scanned</string>
-    <string name="title_activity_compose">Compose</string>
     <string name="perm_phone">You need phone permissions to dial MOMO code</string>
     <string name="go_to_settings">Please enable call permission to dial momo code</string>
     <string name="add_contact">Add Contact</string>
     <string name="add_fav_prompt">You can Add your favorite contacts to send money to</string>
     <string name="no_contacts">No Contacts</string>
     <string name="fields_required">All fields are required</string>
+    <string name="your_details">Your Details</string>
+    <string name="pick_contact">Pick Contact</string>
+    <string name="prompt_allow_read_contacts">You need to grant permissions to read contacts so we can pick contact and send money to</string>
+    <string name="recipient">Recipient</string>
+    <string name="prompt_open_settings">You need to enable read contact settings to select number</string>
+    <string name="amount_to_Send">Amount you want to send</string>
+    <string name="valid_number_required">An MTN or Orange number is required</string>
 </resources>

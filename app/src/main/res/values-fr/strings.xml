@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Nom</string>
+    <string name="phone">Numéro de téléphone</string>
+    <string name="save">Sauvegarder</string>
+    <string name="transfer_to">Transférer à</string>
+    <string name="amount_to_be_sent">Montant à envoyer</string>
+    <string name="send">Envoyez</string>
+    <string name="receive_money">Recevoir de l\'argent</string>
+    <string name="add_recipient">Ajouter un destinataire</string>
+    <string name="send_money">Envoyer de l\'argent</string>
+    <string name="recipients">Destinataires</string>
+    <string name="your_name">Votre nom</string>
+    <string name="your_phone">Votre téléphone</string>
+    <string name="making_momo_transactions_easy">Faciliter les transactions MoMo</string>
+    <string name="enter_valid_amount">Veuillez saisir un montant valide</string>
+    <string name="permission_momo_required">Des autorisations sont nécessaires pour composer le code Momo</string>
+    <string name="set_details">Définissez vos détails</string>
+    <string name="set_valid_details">Veuillez définir des détails valides</string>
+    <string name="invalid_scanned_contact">Contact invalide scanné</string>
+    <string name="need_to_set_details">Vous devez définir vos coordonnées afin de pouvoir recevoir de l\'argent lorsque votre code est scanné</string>
+    <string name="perm_phone">Vous avez besoin d\'autorisations téléphoniques pour composer le code MOMO</string>
+    <string name="go_to_settings">Veuillez activer l\'autorisation d\'appel pour composer le code momo</string>
+    <string name="add_contact">Ajoutez un  contact</string>
+    <string name="add_fav_prompt">Vous pouvez ajouter vos contacts favoris pour envoyer de l\'argent à</string>
+    <string name="no_contacts">Aucun contact</string>
+    <string name="fields_required">Toutes les entrées sont obligatoires</string>
+    <string name="your_details">Vos détails</string>
+    <string name="pick_contact">Choisir le contact</string>
+    <string name="prompt_allow_read_contacts">Vous devez accorder des autorisations pour lire les contacts afin que nous puissions sélectionner les contacts et envoyer de l\'argent à</string>
+    <string name="recipient">Destinataire</string>
+    <string name="prompt_open_settings">Vous devez activer la lecture des paramètres de contact pour sélectionner le numéro</string>
+    <string name="amount_to_Send">Montant que vous souhaitez envoyer</string>
+    <string name="valid_number_required">Un numéro MTN ou Orange est requis</string>
+</resources>

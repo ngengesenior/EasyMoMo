@@ -4,19 +4,28 @@
     <item
         android:id="@+id/navigation_my_qr"
         android:enabled="true"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_baseline_qr_code"
         android:title="@string/receive_money" />
 
     <item
+        android:id="@+id/navigation_pick_contact"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_select"
+        android:title="@string/pick_contact" />
+    <item
         android:id="@+id/navigation_scan"
         android:enabled="true"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_baseline_qr_code_scanner"
         android:title="@string/send" />
     <item
         android:id="@+id/navigation_receivers"
         android:enabled="true"
         android:icon="@drawable/ic_contacts_24"
         android:title="@string/recipients" />
+    <item android:id="@+id/navigation_your_details"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/your_details"/>
 
     <!--<item
         android:id="@+id/navigation_transfer"

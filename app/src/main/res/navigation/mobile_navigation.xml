@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/navigation_add_recipient"
-        android:name="com.ngengeapps.easymomo.AddRecipientFragment"
-        android:label="@string/add_recipient"
-        tools:layout="@layout/fragment_add_recipient" >
+        android:name="com.ngengeapps.easymomo.ui.AddRecipientFragment"
+        android:label="@string/add_recipient">
         <action
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
@@ -19,41 +18,51 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_transfer"
-        android:name="com.ngengeapps.easymomo.TransferFragment"
+        android:name="com.ngengeapps.easymomo.ui.TransferFragment"
         android:label="@string/send_money"
         tools:layout="@layout/fragment_transfer"
         >
-        <argument
-            android:name="account"
-            app:argType="com.ngengeapps.easymomo.models.TrimmedAccount" />
+        <action
+            android:id="@+id/action_navigation_transfer_to_navigation_my_qr"
+            app:destination="@id/navigation_my_qr"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/navigation_my_qr"
-        android:name="com.ngengeapps.easymomo.MyQRCodeFragment"
+        android:name="com.ngengeapps.easymomo.ui.MyQRCodeFragment"
         android:label="@string/receive_money"
-        tools:layout="@layout/fragment_my_q_r_code" />
+         />
     <fragment
         android:id="@+id/navigation_scan"
-        android:name="com.ngengeapps.easymomo.ScanFragment"
-        android:label="Scan To Send"
-        tools:layout="@layout/fragment_scan" >
+        android:name="com.ngengeapps.easymomo.ui.ScanFragment"
+        android:label="Scan To Send">
         <action
             android:id="@+id/action_navigation_scan_to_navigation_transfer"
             app:destination="@id/navigation_transfer" />
     </fragment>
     <fragment
         android:id="@+id/navigation_receivers"
-        android:name="com.ngengeapps.easymomo.RecipientsListFragment"
-        android:label="@string/recipients"
-
-        tools:layout="@layout/fragment_recipients_list" >
+        android:name="com.ngengeapps.easymomo.ui.RecipientsListFragment"
+        android:label="@string/recipients">
         <action
-            app:popUpTo="@id/navigation_my_qr"
-            app:popUpToInclusive="true"
             android:id="@+id/action_navigation_receivers_to_navigation_add_recipient"
-            app:destination="@id/navigation_add_recipient" />
+            app:destination="@id/navigation_add_recipient"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_my_qr"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_navigation_receivers_to_navigation_transfer"
             app:destination="@id/navigation_transfer" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_your_details"
+        android:name="com.ngengeapps.easymomo.ui.YourDetailsAndEditFragment"
+        android:label="@string/your_details"
+         />
+    <fragment
+        android:id="@+id/navigation_pick_contact"
+        android:name="com.ngengeapps.easymomo.ui.PickContactFragment"
+        android:label="@string/pick_contact" />
 </navigation>

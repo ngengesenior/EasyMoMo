@@ -13,7 +13,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".TransferFragment">
+        tools:context=".ui.TransferFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorPrimary"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:text="@string/send_money"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/textView2"
@@ -25,7 +42,7 @@
             android:fontFamily="@font/open_sans_bold"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/textViewName"
@@ -71,7 +88,7 @@
             android:id="@+id/textInputLayout5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@android:color/darker_gray"
+            app:boxBackgroundColor="@android:color/black"
             app:boxStrokeColor="@color/colorPrimary"
             app:boxStrokeWidth="1dp"
             android:layout_marginTop="32dp"
@@ -90,11 +107,13 @@
 
         <Button
             android:id="@+id/buttonSend"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:layout_marginTop="24dp"
             android:text="@string/send"
+            android:layout_marginHorizontal="12dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 

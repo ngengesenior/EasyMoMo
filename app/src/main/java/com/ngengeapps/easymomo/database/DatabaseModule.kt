@@ -1,9 +1,7 @@
-package com.ngengeapps.easymomo
+package com.ngengeapps.easymomo.database
 
 import android.content.Context
 import androidx.room.Room
-import com.ngengeapps.easymomo.database.AccountDao
-import com.ngengeapps.easymomo.database.AccountDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.ngengeapps.easymomo
+package com.ngengeapps.easymomo.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
@@ -27,7 +26,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
+import com.ngengeapps.easymomo.R
 import com.ngengeapps.easymomo.models.Account
+import com.ngengeapps.easymomo.utils.MyAppBar
 import com.ngengeapps.easymomo.viewmodels.AccountListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,17 +42,19 @@ class RecipientsListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
 
-        return inflater.inflate(R.layout.fragment_recipients_list,
-            container,false).apply {
-                findViewById<ComposeView>(R.id.navigation_receivers).setContent {
-                    MaterialTheme {
-                        RecipientList(accountsViewModel)
-                    }
+        return ComposeView(context = requireContext()).apply {
+            id = R.id.navigation_receivers
+            setContent {
+                Scaffold(topBar = {
+                    MyAppBar(title = stringResource(R.string.recipients))
+                }) {
+                    RecipientList(accountsViewModel)
                 }
+            }
         }
+
 
     }
 
@@ -65,8 +68,7 @@ class RecipientsListFragment : Fragment() {
             ExtendedFloatingActionButton(text = { Text(text = stringResource(R.string.add_contact)) },onClick = {
                 val action = RecipientsListFragmentDirections.actionNavigationReceiversToNavigationAddRecipient()
                 findNavController().navigate(action)
-            },modifier = Modifier.padding(bottom = 56.dp),
-            backgroundColor = Color(0xFFE30425),contentColor = androidx.compose.ui.graphics.Color.White )
+            },modifier = Modifier.padding(bottom = 56.dp),contentColor = Color.White )
         }) {
 
             AnimatedVisibility(visible = accounts.isNotEmpty()) {
@@ -100,8 +102,9 @@ class RecipientsListFragment : Fragment() {
             .wrapContentHeight()
             .padding(horizontal = 6.dp),elevation = 4.dp) {
             Row( modifier = Modifier.clickable {
+                accountsViewModel.selectedAccount = account.trimAccount()
                 val action =
-                    RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer(account.trimAccount())
+                    RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer()
                 findNavController().navigate(action)
 
             } ,verticalAlignment = Alignment.CenterVertically) {

@@ -1,6 +1,5 @@
 package com.ngengeapps.easymomo.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ngengeapps.easymomo.models.Account
 

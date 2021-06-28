@@ -1,4 +1,4 @@
-package com.ngengeapps.easymomo
+package com.ngengeapps.easymomo.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
+import androidx.compose.material.*
 import androidx.compose.material.ButtonDefaults.buttonColors
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
@@ -20,17 +19,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.ngengeapps.easymomo.R
 import com.ngengeapps.easymomo.models.Account
+import com.ngengeapps.easymomo.utils.MyAppBar
 import com.ngengeapps.easymomo.viewmodels.AccountListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,15 +44,36 @@ class AddRecipientFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(
+
+        return ComposeView(requireContext()).apply {
+            id = R.id.navigation_add_recipient
+            setContent {
+                Scaffold(
+                    topBar = {
+                        MyAppBar(title = stringResource(id = R.string.add_recipient))
+                    }
+                ) {
+                    AddRecipient(accountsViewModel)
+                }
+            }
+        }
+
+        /*return inflater.inflate(
             R.layout.fragment_add_recipient,
             container, false
         ).apply {
             findViewById<ComposeView>(R.id.add_recipient).setContent {
-                AddRecipient(accountsViewModel)
+                Scaffold( 
+                    topBar = {
+                        MyAppBar(title = stringResource(id = R.string.add_recipient))
+                    }
+                ) {
+                    AddRecipient(accountsViewModel)
+                }
+                
 
             }
-        }
+        }*/
 
     }
 
@@ -106,18 +128,20 @@ fun NameAndPhoneScreen(
     onPhoneChange: (String) -> Unit,
     onSaveClick: () -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
 
-
-    Column(modifier = Modifier.padding(horizontal = 6.dp)) {
-
-        Spacer(modifier = Modifier.height(8.dp))
+    Column(modifier = Modifier
+        .padding(horizontal = 6.dp)
+        .fillMaxHeight(),verticalArrangement = Arrangement.Center) {
 
         TextField(value = name, onValueChange = onNameChange, label = {
             Text(text = stringResource(R.string.name))
         }, singleLine = true, modifier = Modifier.fillMaxWidth(),
-            trailingIcon = { Icon(Icons.Default.Person, contentDescription = null) })
+            trailingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+            shape = RoundedCornerShape(12.dp))
 
         Spacer(modifier = Modifier.height(16.dp))
+
 
         TextField(value = phone,
             onValueChange = onPhoneChange,
@@ -126,18 +150,24 @@ fun NameAndPhoneScreen(
             },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardActions = KeyboardActions(onDone = {
+                focusManager.clearFocus()
+            }),
             placeholder = {
                 Text(text = stringResource(R.string.phone))
             },
             modifier = Modifier.fillMaxWidth(),
-            trailingIcon = { Icon(Icons.Default.Phone, contentDescription = null) })
+            trailingIcon = { Icon(Icons.Default.Phone, contentDescription = null) },
+            shape = RoundedCornerShape(12.dp))
 
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Button(
-            onClick = onSaveClick, modifier = Modifier.align(Alignment.End),
-            colors = buttonColors(Color(0xFF4E043A))
+        OutlinedButton(
+            onClick = onSaveClick, modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            colors = buttonColors(Color(0xFF00796B))
         ) {
             Text(text = stringResource(R.string.save), color = Color.White)
         }
