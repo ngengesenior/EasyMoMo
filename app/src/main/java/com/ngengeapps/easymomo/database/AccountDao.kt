@@ -1,7 +1,9 @@
 package com.ngengeapps.easymomo.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ngengeapps.easymomo.models.Account
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AccountDao {
@@ -12,7 +14,7 @@ interface AccountDao {
 
 
     @Query("SELECT * FROM account ORDER BY id")
-    fun getAccounts():List<Account>
+    fun getAccounts(): Flow<List<Account>>
 
 
 

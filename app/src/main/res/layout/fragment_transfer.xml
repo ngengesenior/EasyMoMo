@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="account"
-            type="com.ngengeapps.easymomo.models.TrimmedAccount" />
+            name="viewmodel"
+            type="com.ngengeapps.easymomo.viewmodels.AccountListViewModel" />
 
     </data>
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{account.name}"
+            android:text="@{viewmodel.selectedAccount.name}"
             android:fontFamily="@font/open_sans_bold"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             tools:text="671842463"
-            android:text="@{account.number}"
+            android:text="@{viewmodel.selectedAccount.number}"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -89,6 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:boxBackgroundColor="@android:color/black"
+            android:alpha="0.7"
             app:boxStrokeColor="@color/colorPrimary"
             app:boxStrokeWidth="1dp"
             android:layout_marginTop="32dp"
@@ -100,6 +101,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextAmount"
                 android:layout_width="match_parent"
+                android:textStyle="bold"
                 android:textColor="?attr/colorOnPrimary"
                 android:layout_height="wrap_content"
                 android:inputType="number" />

@@ -43,7 +43,8 @@ class TransferFragment : Fragment() {
 
         binding = FragmentTransferBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        binding.account = viewModel.selectedAccount
+        binding.viewmodel = viewModel
+        //binding.account = viewModel.selectedAccount
 
         binding.buttonSend.setOnClickListener {
             val amount = binding.editTextAmount.text.toString().trim()
@@ -51,8 +52,9 @@ class TransferFragment : Fragment() {
 
                 if (ContextCompat.checkSelfPermission(requireContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
 
-                    val number = viewModel.selectedAccount.number
+                    val number = binding.textViewPhoneNumber.text.toString().trim()
 
+                    Log.d(TAG, "onCreateView: The number is $number")
                     requireContext().dialUSSD(number,amount)
 
                     val action = TransferFragmentDirections.actionNavigationTransferToNavigationMyQr()

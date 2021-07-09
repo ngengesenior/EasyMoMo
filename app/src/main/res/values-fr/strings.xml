@@ -32,4 +32,8 @@
     <string name="prompt_open_settings">Vous devez activer la lecture des paramètres de contact pour sélectionner le numéro</string>
     <string name="amount_to_Send">Montant que vous souhaitez envoyer</string>
     <string name="valid_number_required">Un numéro MTN ou Orange est requis</string>
+    <string name="check_balance">Vérifier le solde</string>
+    <string name="include_charges">Inclure les frais de retrait ?</string>
+    <string name="restart">REDÉMARRER</string>
+    <string name="update_downloaded">Une mise à jour vient d\'être téléchargée.</string>
 </resources>

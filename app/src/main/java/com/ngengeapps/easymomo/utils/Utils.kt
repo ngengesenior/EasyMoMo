@@ -3,15 +3,13 @@ package com.ngengeapps.easymomo.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,17 +23,23 @@ import com.ngengeapps.easymomo.R
 import com.ngengeapps.easymomo.models.PhoneType
 
 @Composable
-fun MyAppBar(title: String = "") {
+fun MyAppBar(title: String = "", navigationIcon:@Composable (()->Unit)? = null,actions: @Composable RowScope.() -> Unit = {}) {
     TopAppBar(title = {
         Text(text = title, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-    }, backgroundColor = colorResource(R.color.colorPrimary), contentColor = Color.White)
+    }, backgroundColor = colorResource(R.color.colorPrimary), contentColor = Color.White,
+    navigationIcon = {navigationIcon},actions = actions)
 }
 
 
 @Composable
 fun TextFieldTranparent() = TextFieldDefaults.textFieldColors(
     focusedIndicatorColor = Color.Transparent,
-    unfocusedIndicatorColor = Color.Transparent
+    unfocusedIndicatorColor = Color.Transparent,
+    backgroundColor = MaterialTheme.colors.onSurface.copy(alpha = 0.4f),
+    textColor = MaterialTheme.colors.surface,
+    focusedLabelColor = MaterialTheme.colors.onPrimary,
+    unfocusedLabelColor = MaterialTheme.colors.onPrimary.copy(alpha = 0.7f),
+    trailingIconColor = colorResource(id = R.color.colorPrimary).copy(alpha = 0.7f)
 )
 
 @Composable
@@ -85,6 +89,10 @@ fun getNumberType(number: String): PhoneType {
         || number.startsWith("653")
         || number.startsWith("654")
         || number.startsWith("680")
+        || number.startsWith("681")
+        || number.startsWith("682")
+        || number.startsWith("683")
+        || number.startsWith("684")
     ) {
         return PhoneType.MTN
     } else if (
@@ -94,13 +102,31 @@ fun getNumberType(number: String): PhoneType {
         || number.startsWith("657")
         || number.startsWith("658")
         || number.startsWith("659")
+        || number.startsWith("685")
+        || number.startsWith("686")
+        || number.startsWith("687")
+        || number.startsWith("688")
+        || number.startsWith("689")
     ) {
         return PhoneType.ORANGE
     }
     return PhoneType.NOT_VALID
 }
 
+fun Context.checkBalance() {
+    startActivity(Intent(
+        Intent.ACTION_CALL,
+        Uri.fromParts(
+            "tel",
+            "*126*7*1#",
+            null
+        )
+    ))
+}
+
+private val TAG_ = "Transfer"
 fun Context.dialUSSD(number: String,amount:String) {
+    Log.d(TAG_, "dialUSSD: $amount")
     when(getNumberType(number)) {
         PhoneType.MTN -> {
             startActivity(Intent(
@@ -168,7 +194,8 @@ fun calculateOrangeMoneyCharges(amount: Int):Int {
 
 data class Page(val title: String, val description: String,@DrawableRes val image:Int)
 
-val onboardPages = listOf<Page>(
+
+val onboardPages = listOf(
     Page(
         "Easy Momo Transfer",
         "Make a quick transaction with someone besides you by scanning their Easy Momo Code",
@@ -185,3 +212,4 @@ val onboardPages = listOf<Page>(
         R.drawable.ic_security
     )
 )
+

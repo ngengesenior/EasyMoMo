@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import com.ngengeapps.easymomo.R
@@ -36,7 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecipientsListFragment : Fragment() {
 
-    private val accountsViewModel: AccountListViewModel by viewModels()
+    private val accountsViewModel: AccountListViewModel by activityViewModels()
 
     @ExperimentalAnimationApi
     override fun onCreateView(
@@ -60,7 +60,7 @@ class RecipientsListFragment : Fragment() {
 
     @ExperimentalAnimationApi
     @Composable
-    fun RecipientList(accountViewModel: AccountListViewModel = viewModel()) {
+    fun RecipientList(accountViewModel: AccountListViewModel) {
 
         val accounts by accountViewModel.accounts.observeAsState(listOf())
 
@@ -73,6 +73,9 @@ class RecipientsListFragment : Fragment() {
 
             AnimatedVisibility(visible = accounts.isNotEmpty()) {
                 LazyColumn{
+                    item {
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                     items(accounts,key = { it}) { account ->
                         ContactItem(account = account)
                         Spacer(modifier = Modifier.height(4.dp))
@@ -99,15 +102,17 @@ class RecipientsListFragment : Fragment() {
     fun ContactItem(account: Account) {
         Card(modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(horizontal = 6.dp),elevation = 4.dp) {
-            Row( modifier = Modifier.clickable {
-                accountsViewModel.selectedAccount = account.trimAccount()
-                val action =
-                    RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer()
-                findNavController().navigate(action)
+            .wrapContentHeight().padding(8.dp)
+            .padding(horizontal = 6.dp),elevation = 0.dp) {
+            Row( modifier = Modifier
+                .clickable {
+                    accountsViewModel.setAccount(account.trimAccount())
+                    val action =
+                        RecipientsListFragmentDirections.actionNavigationReceiversToNavigationTransfer()
+                    findNavController().navigate(action)
 
-            } ,verticalAlignment = Alignment.CenterVertically) {
+                }
+                .padding( vertical = 4.dp) ,verticalAlignment = Alignment.CenterVertically) {
                 Column{
                     Text(text = account.name)
                     Spacer(modifier = Modifier.height(6.dp))

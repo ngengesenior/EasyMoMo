@@ -14,17 +14,22 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ngengeapps.easymomo.R
@@ -63,7 +68,6 @@ class YourDetailsAndEditFragment : Fragment() {
 }
 
 
-
 @ExperimentalAnimationApi
 @Composable
 fun YourDetailsAndEditScreen(yourDetailsViewModel: YourDetailsViewModel = viewModel()) {
@@ -75,35 +79,35 @@ fun YourDetailsAndEditScreen(yourDetailsViewModel: YourDetailsViewModel = viewMo
     val errorMessage by yourDetailsViewModel.errorMessage.observeAsState("")
     val account by yourDetailsViewModel.account.observeAsState()
     LaunchedEffect(errorMessage) {
-        if (errorMessage.trim().isNotBlank()){
-            Toast.makeText(context,errorMessage,Toast.LENGTH_LONG).show()
+        if (errorMessage.trim().isNotBlank()) {
+            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
         }
     }
 
     Scaffold(
         floatingActionButton = {
-            if (!isEditing){
+            if (!isEditing) {
                 FloatingActionButton(onClick = {
                     yourDetailsViewModel.updateIsEditing(true)
-                },modifier = Modifier.padding(bottom = 56.dp)) {
+                }, modifier = Modifier.padding(bottom = 56.dp)) {
 
-                    Icon(Icons.Default.Edit, contentDescription = null,tint = Color.White)
+                    Icon(Icons.Default.Edit, contentDescription = null, tint = Color.White)
 
                 }
             }
         }
     ) {
 
-        AnimatedVisibility(visible = (!isEditing && account != null )) {
+        AnimatedVisibility(visible = (!isEditing && account != null)) {
 
-            YourDetails(trimmedAccount = TrimmedAccount(name.trim(),number.trim()))
+            YourDetails(trimmedAccount = TrimmedAccount(name.trim(), number.trim()))
 
         }
 
         AnimatedVisibility(visible = isEditing) {
             NameAndPhoneScreen(
                 name = name,
-                phone = number ,
+                phone = number,
                 onNameChange = { yourDetailsViewModel.updateName(it) },
                 onPhoneChange = { yourDetailsViewModel.updateNumber(it) }) {
 
@@ -116,26 +120,33 @@ fun YourDetailsAndEditScreen(yourDetailsViewModel: YourDetailsViewModel = viewMo
     }
 
 
-
 }
 
 
 @Composable
 fun YourDetails(trimmedAccount: TrimmedAccount) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "${stringResource(R.string.name)}:")
-            Spacer(modifier = Modifier.width(2.dp))
-            Text(text = trimmedAccount.name,fontWeight = FontWeight.Bold)
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(12.dp))
+        Icon(Icons.Rounded.Person,
+            contentDescription =null,
+            tint = colorResource(R.color.colorPrimary) )
+        Spacer(modifier = Modifier.height(12.dp))
 
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = trimmedAccount.name,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp, fontStyle = FontStyle.Italic
+        )
 
-            Text(text = "${stringResource(R.string.phone)}:")
-            Spacer(modifier = Modifier.width(2.dp))
-            Text(text = trimmedAccount.number,fontWeight = FontWeight.Bold)
-        }
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = trimmedAccount.number,
+            fontWeight = FontWeight.Medium,
+            fontSize = 17.sp
+        )
 
     }
 }

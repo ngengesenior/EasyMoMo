@@ -1,34 +1,23 @@
 package com.ngengeapps.easymomo.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ngengeapps.easymomo.database.AccountDao
 import com.ngengeapps.easymomo.models.Account
 import com.ngengeapps.easymomo.models.TrimmedAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountListViewModel @Inject constructor (private val dataSource:AccountDao):ViewModel() {
-    private val _accounts:MutableLiveData<List<Account>> = MutableLiveData()
-    val accounts:LiveData<List<Account>>
-    get() = _accounts
-    var selectedAccount:TrimmedAccount = TrimmedAccount("","")
+    //private val _accounts:MutableLiveData<List<Account>> = MutableLiveData()
+    val accounts:LiveData<List<Account>> = dataSource.getAccounts().asLiveData()
+    //get() = _accounts
+    var selectedAccount:MutableLiveData<TrimmedAccount> = MutableLiveData()
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            _accounts.postValue(dataSource.getAccounts())
-        }
-
-
-    }
 
     fun setAccount(trimmedAccount: TrimmedAccount) {
-        selectedAccount = trimmedAccount
+        selectedAccount.value = trimmedAccount
     }
     fun insert(account: Account) {
         viewModelScope.launch {

@@ -19,7 +19,7 @@ android {
         applicationId "com.ngengeapps.easymomo"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 11
+        versionCode 14
         versionName "1.4"
 
         vectorDrawables.useSupportLibrary true
@@ -98,10 +98,14 @@ dependencies {
 
     implementation "androidx.navigation:navigation-compose:2.4.0-alpha02"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha06"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta08")
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation 'com.lionscribe.open.libphonenumber:libphonenumber:8.12.18.1'
+
+    implementation 'com.google.android.play:core:1.10.0'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
 
 
 

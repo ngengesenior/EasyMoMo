@@ -32,4 +32,8 @@
     <string name="prompt_open_settings">You need to enable read contact settings to select number</string>
     <string name="amount_to_Send">Amount you want to send</string>
     <string name="valid_number_required">An MTN or Orange number is required</string>
+    <string name="include_charges">Include withdrawal charges?</string>
+    <string name="check_balance">Check Balance</string>
+    <string name="restart">RESTART</string>
+    <string name="update_downloaded">An update has just been downloaded.</string>
 </resources>
